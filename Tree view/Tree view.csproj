@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <RootNamespace>Tree_view</RootNamespace>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Icons\step.png" />
+    <None Remove="Icons\task.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\step.png" />
+    <Resource Include="Icons\task.png" />
+  </ItemGroup>
+
+</Project>
