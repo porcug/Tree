@@ -12,20 +12,13 @@ namespace Tree_view.ViewModel
     {
         private string _Name;
         Root root;
-        String path = "/";
-        public Task(Root root,String [] arguments,String path)
+        String path = "0";
+        public Task(Root root,String [] arguments)
         {
-            _Icon = new BitmapImage(new Uri("pack://aplication:,,/Resources/Icons/task.png"));
-            _Name = arguments[2];
-            if(arguments[0].Equals("+"))
-            {
-                base.IsExpanded = false;
-            }
-            if (arguments[0].Equals("-"))
-            {
-                base.IsExpanded = true;
-            }
-            this.path = path + "/" + arguments[1];
+            //_Icon = new BitmapImage(new Uri("pack://aplication:,,/Icons/task.png"));
+            _Name = arguments[1];
+           
+            this.path =  arguments[0];
             
             this.root = root;
         }

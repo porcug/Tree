@@ -13,11 +13,11 @@ namespace Tree_view.ViewModel
 
         List<String> owners = new List<string>();
         
-       public Step (Root root,String [] arguments,String path):base(root,arguments,path)
+       public Step (Root root,String [] arguments):base(root,arguments)
         {
             
-            _Icon = new BitmapImage(new Uri("pack://aplication:,,/Resources/Icons/step.png"));
-          foreach (String nume in arguments.Skip(3))
+            //_Icon = new BitmapImage(new Uri("pack://aplication:,,/Resources/Icons/step.png"));
+          foreach (String nume in arguments.Skip(2))
             {
                 owners.Add(nume);
             }
@@ -27,9 +27,11 @@ namespace Tree_view.ViewModel
         protected override string getText()
 
         {
-            
-            return base.Text+" - "+ String.Join(" & ", owners);
-
+            if (owners.Count() != 1)
+            {
+                return base.getText() + " - " + String.Join(" & ", owners.Take(owners.Count - 1)) + owners.Last();
+            }
+            return base.getText() + " - anonymus";
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Tree_view
         public TreeView()
         {
             InitializeComponent();
-            TreeModel model = new TreeModel();
+            TreeModel model = new TreeModel("127.0.0.1");
             DataContext = model;
         }
     }

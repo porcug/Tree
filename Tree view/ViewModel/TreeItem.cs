@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 
 namespace Tree_view.ViewModel
 {
-    abstract class TreeItem:I
+    abstract class TreeItem: INotifyPropertyChanged
     {
         protected BitmapImage _Icon;
         protected TreeItem _parent = null;

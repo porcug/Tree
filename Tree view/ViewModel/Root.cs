@@ -26,17 +26,22 @@ namespace Tree_view.ViewModel
         }
        
       
-        public ReadOnlyCollection<TreeItem> getChildrens(String path="/")
+        public ReadOnlyCollection<TreeItem> getChildrens(String parentId="0")
         {
             TcpClient client = new TcpClient(serverAddress, port);
             List<TreeItem> childrens = new List<TreeItem>();
-            client.GetStream().Write(Encoding.UTF8.GetBytes(path));
+            client.GetStream().Write(Encoding.UTF8.GetBytes(parentId));
+            client.GetStream().Flush();
             Byte[] buffer = new Byte[1024];
             int read = 0;
             String recived = "";
+            client.ReceiveTimeout = 500;
             do
             {
-                read = client.GetStream().Read(buffer);
+                try
+                {
+                    read = client.GetStream().Read(buffer);
+                } catch { read = 0; }
                 if (read > 0)
                     recived += Encoding.UTF8.GetString(buffer, 0, read);
             } while (read > 0);
@@ -49,11 +54,11 @@ namespace Tree_view.ViewModel
                     continue;
                 if (componments[0].Equals("T"))
                 {
-                    childrens.Add(new Task(this, componments.Skip(1).ToArray(),path));
+                    childrens.Add(new Task(this, componments.Skip(1).ToArray()));
                 }
                 if (componments[0].Equals("S"))
                 {
-                    childrens.Add(new Step(this, componments.Skip(1).ToArray(),path));
+                    childrens.Add(new Step(this, componments.Skip(1).ToArray()));
                 }
             }
             return new ReadOnlyCollection<TreeItem>(childrens);
